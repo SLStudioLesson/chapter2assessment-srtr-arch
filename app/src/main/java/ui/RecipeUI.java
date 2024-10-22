@@ -37,6 +37,35 @@ public class RecipeUI {
                 switch (choice) {
                     case "1":
                         // 設問1: 一覧表示機能
+                        ;
+                        RecipeFileHandler handler = new RecipeFileHandler();
+                        ArrayList<String> list1 = handler.readRecipes();
+                        //if(list1!=null){System.out.println("a"); break;}
+                        System.out.println("Recipes:");
+                        System.out.println("-----------------------------------");
+                        
+                        for(int i=0;i<list1.size();i++){
+                            if(i%2==0&&i!=1){
+                                
+                                System.out.println("Recipe Name: "+list1.get(i));
+                            }else{
+                                String[]list2 = list1.get(i).split(" ");
+                                System.out.print("Main Ingredients: ");
+                                for(String list:list2){
+                                    System.out.print(list+" ");
+                                    
+                                }
+                                System.out.println();
+                                    System.out.println("-----------------------------------");
+                                
+
+                                
+                            }
+
+                        }
+
+                       
+
                         break;
                     case "2":
                         // 設問2: 新規登録機能

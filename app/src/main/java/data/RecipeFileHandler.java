@@ -2,6 +2,9 @@ package data;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.File;
 
 public class RecipeFileHandler {
     private String filePath;
@@ -22,12 +25,29 @@ public class RecipeFileHandler {
      * @return レシピデータ
      */
     public ArrayList<String> readRecipes() {
-        // try {
 
-        // } catch (IOException e) {
-        //     System.out.println("Error reading file:" + e.getMessage());
-        // }
-        return null;
+        File file = new File(filePath);
+
+        ArrayList<String>readRecipesSplit = new ArrayList<>();
+        if(file.exists()){
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))){
+            
+            String line;
+            while((line=reader.readLine())!=null){
+                if(line.isEmpty()){System.out.println("a");}
+                readRecipesSplit.add(line.split(",",2)[0]);
+                readRecipesSplit.add(line.split(",",2)[1]);
+            
+            }
+            
+         } catch (IOException e) {
+             System.out.println("Error reading file:" + e.getMessage());
+         }
+         return readRecipesSplit;
+        }else{
+            
+            return null;
+        }
     }
 
     /**
