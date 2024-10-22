@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class RecipeFileHandler {
     private String filePath;
@@ -34,7 +36,7 @@ public class RecipeFileHandler {
             
             String line;
             while((line=reader.readLine())!=null){
-                if(line.isEmpty()){System.out.println("a");}
+                
                 readRecipesSplit.add(line.split(",",2)[0]);
                 readRecipesSplit.add(line.split(",",2)[1]);
             
@@ -60,10 +62,14 @@ public class RecipeFileHandler {
      */
      // 
     public void addRecipe(String recipeName, String ingredients) {
-        // try {
+         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true))){
+            writer.newLine();
+            writer.write(recipeName+","+ingredients);
+            System.out.println("Recipe added successfully.");
+         } catch (IOException e) {
+            System.out.println("Error reading file:" + e.getMessage());
+         }
 
-        // } catch (IOException e) {
-
-        // }
+         
     }
 }
